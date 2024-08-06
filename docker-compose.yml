@@ -1,0 +1,35 @@
+version: "3.8"
+services:
+  web:
+    build: ./client
+    depends_on:
+      - api
+    ports:
+      - "3000:3000"
+    networks:
+      - network-backend
+  api:
+    build: ./server
+    ports:
+      - "5000:5000"
+    networks: 
+     - network-backend
+    depends_on:
+      - database
+
+  database:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: anant2359
+      POSTGRES_DB: perntodo
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+networks:
+  network-backend:
+
+volumes:
+  postgres_data:

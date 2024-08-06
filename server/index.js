@@ -17,7 +17,7 @@ app.post("/todo",async(req,res)=>{
         );
         res.json(newTodo.rows[0]);
     }
-    catch{
+    catch(err){
         console.log(err.message);
     }
 });
@@ -28,7 +28,7 @@ app.get("/todo", async(req,res)=>{
         const alltodos = await pool.query("SELECT * FROM todo");
         res.json(alltodos.rows);
     }
-    catch{
+    catch(err){
         console.log(err.message);
     }
 })
@@ -70,6 +70,8 @@ app.delete("/todo/:id",async(req,res)=>{
 
 })
 //
+
+
 app.listen(5000,()=>{
     console.log("server has started on port 5000")
 })
